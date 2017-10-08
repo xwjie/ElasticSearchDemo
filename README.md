@@ -1,0 +1,2 @@
+# ElasticSearchDemo
+ElasticSearch+Springboot的例子，对本机的文本等文件进行全文检索
