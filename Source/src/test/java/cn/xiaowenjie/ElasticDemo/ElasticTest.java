@@ -1,33 +1,20 @@
 package cn.xiaowenjie.ElasticDemo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
-
-import javax.swing.text.Document;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.index.query.IdsQueryBuilder;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.search.MultiMatchQuery.QueryBuilder;
-import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,18 +22,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.xiaowenjie.elastic.beans.Article;
-import cn.xiaowenjie.elastic.services.ArticleService;
-import cn.xiaowenjie.elastic.services.ElasticService;
-import lombok.extern.log4j.Log4j;
-import net.minidev.json.JSONObject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Log4j
 public class ElasticTest {
 
 	@Autowired
-	TransportClient client;
+	Client client;
 
 	// smartcn_tokenizer
 	//@Autowired

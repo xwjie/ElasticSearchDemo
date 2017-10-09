@@ -20,11 +20,20 @@ public class ArticleService {
 	ElasticService ela;
 
 	public void addFile(File f) throws IOException {
+		if (!canAdd(f)) {
+			return;
+		}
+
 		Article art = fromFile(f);
 
 		log.info("add index:" + f);
 
 		ela.addIndex("article", art.getFilePath(), art);
+	}
+
+	private boolean canAdd(File f) {
+		// TODO 先只加文本文件
+		return f.getName().toLowerCase().endsWith(".txt");
 	}
 
 	@SneakyThrows
@@ -33,9 +42,10 @@ public class ArticleService {
 	}
 
 	private Article fromFile(File f) throws IOException {
-		//FIXME 要判断编码格式
+		// FIXME 要判断编码格式
 		return Article.builder().title(f.getName()).body(FileUtils.readFileToString(f, "gbk")).size(f.length())
-				.lastModified(f.lastModified()).fileExt(FilenameUtils.getExtension(f.getName())).build();
+				.lastModified(f.lastModified()).filePath(f.getAbsolutePath())
+				.fileExt(FilenameUtils.getExtension(f.getName())).build();
 	}
 
 }

@@ -6,11 +6,10 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,8 +22,7 @@ public class ElasticService {
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	@Autowired
-	@Lazy
-	TransportClient client;
+	Client client;
 
 	public <T> T getById(String index, String id, Class<?> T)
 			throws IllegalAccessException, InvocationTargetException, InstantiationException {
