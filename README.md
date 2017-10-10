@@ -23,6 +23,35 @@ http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type,Content-Leng
 http.cors.allow-credentials: true
 ```
 
+# 完全匹配关键字
+```
+query: {
+        match: {
+            body: key
+        }
+    },
+```
+修改为
+```
+query: {
+        match_phrase: {
+            body: key
+        }
+    },
+```
+
+# 不返回某些字段
+
+```
+_source: {
+	//includes: [
+	//    '*.count',
+	//    'meta.*'
+	//],
+	excludes: ['body']
+},
+```
+
 # 踩坑记
 
 * 注入的类型不对导致无法启动

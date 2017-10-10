@@ -15,9 +15,16 @@ ela.searchArt = function (key, page) {
             size: page.pageSize,
             from: page.pageSize * (page.currentPage - 1),
             query: {
-                match: {
+                match_phrase: {
                     body: key
                 }
+            },
+            _source: {
+                //includes: [
+                //    '*.count',
+                //    'meta.*'
+                //],
+                excludes: ['body']
             },
             highlight: {
                 fields: {
